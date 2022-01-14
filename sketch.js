@@ -7,6 +7,9 @@
 
 let inc = 0.1;
 let scl = 10;
+let zOff = 0;
+let zInc = 0.01;
+
 let cols, rows;
 
 let fr;
@@ -20,19 +23,28 @@ function setup() {
 }
 
 function draw() {
-  var yOff = 0.0;
+  background(255);
+  let yOff = 0.0;
+  
 
-  for(var y = 0; y < rows; y ++){
-    var xOff = 0;
-    for(var x = 0; x < cols; x ++){
-      var index = (x + y * width) * 4;
+  for(let y = 0; y < rows; y ++){
+    let xOff = 0;
+    for(let x = 0; x < cols; x ++){
+      let index = (x + y * width) * 4;
+      let angle = noise(xOff, yOff, zOff)* TAU;
+      let v = p5.Vector.fromAngle(angle);
       xOff += inc;
+      stroke(0);
+      push();
+      translate(x * scl, y * scl);
+      rotate(v.heading());
+      line(0, 0, scl, 0);
 
-      fill(noise(xOff, yOff)* 255);
-      rect(x * scl, y * scl, scl, scl);
+      pop();
     }
     yOff+= inc;
     
     fr.html(floor(frameRate()));
   }
+  zOff += zInc;
 }
