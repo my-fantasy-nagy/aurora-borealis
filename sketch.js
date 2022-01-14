@@ -5,35 +5,34 @@
 //https://www.youtube.com/watch?v=BjoM9oKOAKY
 
 
-var inc = 0.01;
+let inc = 0.1;
+let scl = 10;
+let cols, rows;
 
+let fr;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(200, 200);
   pixelDensity(1);
-  
+  cols = floor(width / scl);
+  rows = floor(height / scl);
+  fr = createP('');
 }
 
 function draw() {
   var yOff = 0.0;
-  loadPixels();
 
-  
-  for(var x = 0; x < width; x ++){
-    var xOff = 0.0;
-    for(var y = 0; y < height; y ++){
+  for(var y = 0; y < rows; y ++){
+    var xOff = 0;
+    for(var x = 0; x < cols; x ++){
       var index = (x + y * width) * 4;
-      var r = noise(xOff, yOff) * 255;
-      pixels[index + 0] = r;
-      pixels[index + 1] = r;
-      pixels[index + 2] = r;
-      pixels[index + 3] = 255;
-
       xOff += inc;
+
+      fill(noise(xOff, yOff)* 255);
+      rect(x * scl, y * scl, scl, scl);
     }
     yOff+= inc;
     
+    fr.html(floor(frameRate()));
   }
-  updatePixels();
-  noLoop();
 }
