@@ -32,19 +32,25 @@ function draw() {
       let index = (x + y * width) * 4;
       let magnitude = noise(xOff, yOff, zOff) - 0.5;
       let v = p5.Vector.fromAngle(-PI/2);
-      xOff += inc;
-      stroke(0);
 
+      
       push();
       translate(x * scl, y * scl);
       rotate(v.heading());
-      line(0, 0, 5, 0);
+
+      stroke(0);
+      strokeWeight(2);
+      len = map(magnitude, -0.5, 0.5, -scl, scl);
+      line(0, 0, len, 0);
+      strokeWeight(5);
+      point(0, 0);
       pop();
+
+      xOff += inc;
     }
     yOff+= inc;
   }
-
+  // zOff += zInc;
   noLoop();
   fr.html(floor(frameRate()));
-  // zOff += zInc;
 }
