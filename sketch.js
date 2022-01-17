@@ -4,6 +4,7 @@
 //Inspired by Daniel Schifmann's Perlin Noise Flow Field Example
 //https://www.youtube.com/watch?v=BjoM9oKOAKY
 
+const NUM_PARTICLES = 50;
 
 let inc = 0.1;
 let scl = 30;
@@ -11,8 +12,9 @@ let zOff = 0;
 let zInc = 0.01;
 
 let cols, rows;
-
 let fr;
+let flowField = [];
+var particles = [];
 
 function setup() {
   createCanvas(600, 600);
@@ -20,6 +22,13 @@ function setup() {
   cols = floor(width / scl);
   rows = floor(height / scl);
   fr = createP('');
+
+  // particles = new Array(NUM_PARTICLES);
+  flowField = new Array(cols * rows);
+
+  for (var i = 0; i < NUM_PARTICLES; i ++){ 
+    // particles[i] = new Particle();
+  }
 }
 
 function draw() {
@@ -32,7 +41,7 @@ function draw() {
       let index = (x + y * width) * 4;
       let magnitude = noise(xOff, yOff, zOff) - 0.5;
       let v = p5.Vector.fromAngle(-PI/2);
-
+      v.setMag(magnitude);
       
       push();
       translate(x * scl, y * scl);
