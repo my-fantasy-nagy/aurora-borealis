@@ -5,16 +5,14 @@
 //https://www.youtube.com/watch?v=BjoM9oKOAKY
 
 
-const NUM_PARTICLES = 5000;
+const NUM_PARTICLES = 100;
 const MAG = .05;
+const LENGTH = 30;
 
 let inc = 0.1;
 let scl = 10;
 let zOff = 0;
 let zInc = 0.01;
-
-
-
 
 let cols, rows;
 let fr;
@@ -27,6 +25,7 @@ var flowField = [];
 function setup() {
   createCanvas(400, 400);
   pixelDensity(1);
+  // frameRate(1);
   cols = floor(width / scl);
   rows = floor(height / scl);
   fr = createP('');
@@ -36,10 +35,11 @@ function setup() {
   for (var i = 0; i < NUM_PARTICLES; i ++){ 
     particles[i] = new Particle();
   }
+  
 }
 
 function draw() {
-  background(255);
+  background(0);
   let yOff = 0.0;
   
 
@@ -57,19 +57,24 @@ function draw() {
       translate(x * scl, y * scl);
       rotate(v.heading());
       strokeWeight(1);
-      line(0, 0, scl, 0);
-
+      // line(0, 0, scl, 0);
       pop();
     }
     yOff+= inc;
-    
+
   }
+
+  let mouseVector = createVector(mouseX, mouseY);
+  mouseVector.setMag = 1;
+  
   for (var i = 0; i < NUM_PARTICLES; i ++){ 
-    particles[i].update();
     particles[i].show();
+    particles[i].update();
     particles[i].edges();
     particles[i].follow(flowField);
-
+    if(mouseIsPressed){
+      // particles[i].followMouse(mouseVector);
+    }
   }
   
   fr.html(floor(frameRate()));
