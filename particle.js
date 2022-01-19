@@ -58,4 +58,13 @@ function Particle() {
         this.applyForce(force);
     }
 
+    this.followMouse = function(spacePressed){
+        let mouseVector = createVector(mouseX, mouseY);
+        mouseVector.sub(this.pos);
+        mouseVector.setMag(3);
+        if(spacePressed){
+            mouseVector.mult(-1, -1);    
+        }
+        this.applyForce(mouseVector);
+    }
 }

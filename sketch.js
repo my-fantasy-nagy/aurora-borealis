@@ -1,11 +1,10 @@
 //Aurora borealis like sketch using 3D noise and flow fields
 
-
 //Inspired by Daniel Schifmann's Perlin Noise Flow Field Example
 //https://www.youtube.com/watch?v=BjoM9oKOAKY
 
 
-const NUM_PARTICLES = 100;
+const NUM_PARTICLES = 250;
 const MAG = .05;
 const LENGTH = 30;
 
@@ -72,11 +71,20 @@ function draw() {
     particles[i].update();
     particles[i].edges();
     particles[i].follow(flowField);
+    //IF MOUSE PRESSED
     if(mouseIsPressed){
-      // particles[i].followMouse(mouseVector);
+      //IF SPACEBAR PRESSED
+      if ((keyIsPressed == true) && (key == ' ')){
+        particles[i].followMouse(true);
+      }
+      else{
+        particles[i].followMouse(false);
+      }
     }
   }
-  
+  spacePressed = false;
+
   fr.html(floor(frameRate()));
   zOff += zInc;
 }
+
