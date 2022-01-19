@@ -1,10 +1,11 @@
 function Particle() {
-
+    
     this.pos = createVector(random(width), random(height));
     this.vel = createVector(0,0);
     this.acc = createVector(0,0);
-    this.maxSpeed = 1;
+    this.maxSpeed = 3;
     this.history = [];
+    this.primaryColor;
     
     this. update = function() {
         this.pos.add(this.vel);
@@ -15,7 +16,7 @@ function Particle() {
         let v = createVector(this.pos.x, this.pos.y);
 
         this.history.push(v);
-
+        
 
         if (this.history.length > 20) {
         this.history.splice(0, 1);
@@ -29,16 +30,16 @@ function Particle() {
     this.show = function() {
         noStroke();
         strokeWeight(4);
-        // beginShape();
+
         let prevPoint = createVector(0,0);
         for (let i = 0; i < this.history.length; i++) {
             let p = this.history[i];
             let alpha = map(i, 0, this.history.length, 0, 255);
             let rad = map(i, 0, this.history.length, 15, 1);
-            fill(255, alpha);
+            let fillCol = this.primaryColor;
+            fillCol.setAlpha(alpha);
+            fill(this.primaryColor);
             ellipse(p.x, p.y, rad, rad);
-
-            // endShape();
         }
     }
         
@@ -66,5 +67,19 @@ function Particle() {
             mouseVector.mult(-1, -1);    
         }
         this.applyForce(mouseVector);
+    }
+
+    this.rollColor = function(){
+        let roll = floor(random(0,3));
+        if(roll === 0){
+            this.primaryColor = color(255,0,0);
+        }
+        else if(roll === 1){
+            this.primaryColor = color(255,255,0);
+        }
+        else if(roll === 2){
+            this.primaryColor = color(0,0,255);
+        }
+        else this.color(255);
     }
 }

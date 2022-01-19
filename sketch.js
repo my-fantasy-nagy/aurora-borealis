@@ -4,7 +4,7 @@
 //https://www.youtube.com/watch?v=BjoM9oKOAKY
 
 
-const NUM_PARTICLES = 250;
+const NUM_PARTICLES = 300;
 const MAG = .05;
 const LENGTH = 30;
 
@@ -33,6 +33,7 @@ function setup() {
 
   for (var i = 0; i < NUM_PARTICLES; i ++){ 
     particles[i] = new Particle();
+    particles[i].rollColor();
   }
   
 }
@@ -51,12 +52,14 @@ function draw() {
       v.setMag(MAG);
       flowField[index] = v;
       xOff += inc;
-      stroke(0, 100);
+      stroke(150, 100);
       push();
       translate(x * scl, y * scl);
       rotate(v.heading());
       strokeWeight(1);
-      // line(0, 0, scl, 0);
+      if ((keyIsPressed == true) && (key == 'a')){
+      line(0, 0, scl, 0);
+      }
       pop();
     }
     yOff+= inc;
