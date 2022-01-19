@@ -4,11 +4,13 @@
 //https://www.youtube.com/watch?v=BjoM9oKOAKY
 
 
-const NUM_PARTICLES = 300;
-const MAG = .05;
-const LENGTH = 30;
+const NUM_PARTICLES = 200;
+const FORCEFIELD_MAG = .05;
+const MOUSE_MAG = 1;
 const NOISE_RATE = 0.1;
 const Z_RATE = 0.01;
+const MAX_SPEED = 3;
+const TAIL_LENGTH = 20;
 let scl = 10;
 let zOffset = 0;
 let cols, rows;
@@ -62,7 +64,7 @@ function draw() {
 
       // CREATE VECTOR FROM ANGLE AND ADD TO FLOW FIELD
       let v = p5.Vector.fromAngle(angle);
-      v.setMag(MAG);
+      v.setMag(FORCEFIELD_MAG);
       flowField[index] = v;
 
       //INCREMENT X OFFSET
@@ -87,7 +89,7 @@ function draw() {
 
   // CREATE MOUSE VECTOR
   let mouseVector = createVector(mouseX, mouseY);
-  mouseVector.setMag = 1;
+  mouseVector.setMag = MOUSE_MAG;
   
   // UPDATED PARTICLES
   for (var i = 0; i < NUM_PARTICLES; i ++){ 
