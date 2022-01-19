@@ -1,7 +1,15 @@
-//Aurora borealis like sketch using 3D noise and flow fields
+// Paricle Flow Field Sketch With Mouse Push/Pull Interacion
 
-//Inspired by Daniel Schifmann's Perlin Noise Flow Field Example
-//https://www.youtube.com/watch?v=BjoM9oKOAKY
+// Inspired by:
+
+// Daniel Schifmann's Perlin Noise Flow Field Example
+// https://www.youtube.com/watch?v=BjoM9oKOAKY
+
+// Daniel Schifmann's Object Trails
+// https://www.youtube.com/watch?v=vqE8DMfOajk
+
+// Tyler Hobbs Flow Fields
+// https://tylerxhobbs.com/essays/2020/flow-fields
 
 
 const NUM_PARTICLES = 200;
