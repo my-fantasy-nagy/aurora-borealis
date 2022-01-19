@@ -77,7 +77,7 @@ function draw() {
       rotate(v.heading());
       strokeWeight(1);
       if ((keyIsPressed == true) && (key == 'a')){
-        line(0, 0, scl, 0);
+        line(0, 0, scl , 0);
       }
       pop();
     }
@@ -98,16 +98,14 @@ function draw() {
     particles[i].edges();
     particles[i].follow(flowField);
 
+    if ((keyIsPressed == true) && (key == ' ')){
+      particles[i].followMouse(true);
+    }
+        
     //IF MOUSE PRESSED
     if(mouseIsPressed){
-      //IF SPACEBAR PRESSED PUSH AWAY PARTICLES
-      if ((keyIsPressed == true) && (key == ' ')){
-        particles[i].followMouse(true);
-      }
-      else{
         // IF SPACEBAR NOT PRESSED PULL IN PARTICLES
         particles[i].followMouse(false);
-      }
     }
   }
 
